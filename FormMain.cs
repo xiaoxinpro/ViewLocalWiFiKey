@@ -47,6 +47,38 @@ namespace ViewLocalWiFiKey
         }
 
         /// <summary>
+        /// 获取选中列表项
+        /// </summary>
+        /// <param name="listView"></param>
+        /// <returns></returns>
+        private ListViewItem GetSelectListViewItem(ListView listView)
+        {
+            if (listView.SelectedItems.Count == 1)
+            {
+                return listView.SelectedItems[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取列表文本
+        /// </summary>
+        /// <param name="listView"></param>
+        /// <returns></returns>
+        private string GetListViewText(ListView listView)
+        {
+            StringBuilder ret = new StringBuilder(listView.Columns[1].Text + "\t" + listView.Columns[2].Text + "\r\n");
+            foreach (ListViewItem item in listView.Items)
+            {
+                ret.AppendLine(item.SubItems[1].Text + "\t" + item.SubItems[2].Text);
+            }
+            return ret.ToString();
+        }
+
+        /// <summary>
         /// 获取WiFi列表数据
         /// </summary>
         /// <param name="listView"></param>
@@ -94,6 +126,77 @@ namespace ViewLocalWiFiKey
         {
             GetWiFiListViewData(listViewWifi);
             btnWifi.Enabled = true;
+        }
+
+        /// <summary>
+        /// 菜单刷新按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolMenuWiFi_Click(object sender, EventArgs e)
+        {
+            btnWifi.Enabled = false;
+            GetWiFiListViewData(listViewWifi);
+            btnWifi.Enabled = true;
+        }
+
+        /// <summary>
+        /// 菜单复制Wifi密码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolMenuCopyKey_Click(object sender, EventArgs e)
+        {
+            ListViewItem listViewItem = GetSelectListViewItem(listViewWifi);
+            if (listViewItem != null)
+            {
+                Clipboard.SetDataObject(listViewItem.SubItems[2].Text, true);
+                MessageBox.Show("已复制选中项密码。", "复制", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("请先选中要复制的内容。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 菜单复制WiFi名称
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolMenuCopySSID_Click(object sender, EventArgs e)
+        {
+            ListViewItem listViewItem = GetSelectListViewItem(listViewWifi);
+            if (listViewItem != null)
+            {
+                Clipboard.SetDataObject(listViewItem.SubItems[1].Text, true);
+                MessageBox.Show("已复制选中项SSID。", "复制", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("请先选中要复制的内容。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 保存Wifi信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolMenuSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "文本文件（*.txt）|*.txt|表格文件（*.csv）|*.csv";
+            sfd.FilterIndex = 1;
+            sfd.RestoreDirectory = true;
+            sfd.FileName = "备份WiFi信息";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string localFilePath = sfd.FileName.ToString(); //获得文件路径 
+                string fileNameExt = localFilePath.Substring(localFilePath.LastIndexOf("\\") + 1); //获取文件名，不带路径
+                ClassFile.WriteFile(localFilePath, GetListViewText(listViewWifi));
+                MessageBox.Show("【" + fileNameExt + "】备份完成。", "完成", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
