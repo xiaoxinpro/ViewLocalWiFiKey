@@ -11,6 +11,8 @@ ViewLocalWiFiKey使用Win10内置的netsh工具获取的SSID与对应的密码�
 
 双击打开软件，点击刷新即可。
 
+## 截图
+
 ![](https://github.com/xiaoxinpro/ViewLocalWiFiKey/raw/master/ViewLocalWiFiKey.png)
 
 ## 捐赠
