@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.listViewWifi = new System.Windows.Forms.ListView();
             this.btnWifi = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -58,6 +59,7 @@
             this.Controls.Add(this.btnWifi);
             this.Controls.Add(this.listViewWifi);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
