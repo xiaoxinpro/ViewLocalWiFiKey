@@ -23,6 +23,8 @@ namespace ViewLocalWiFiKey
         {
             ObjWiFi = new ClassWiFi();
 
+            this.Text += @" V" + Application.ProductVersion.ToString();
+
             InitListView(listViewWifi);
             //GetWiFiListViewData(listViewWifi);
         }
@@ -197,6 +199,7 @@ namespace ViewLocalWiFiKey
                 ClassFile.WriteFile(localFilePath, GetListViewText(listViewWifi));
                 MessageBox.Show("【" + fileNameExt + "】备份完成。", "完成", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            sfd.Dispose();
         }
     }
 }
