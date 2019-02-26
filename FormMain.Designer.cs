@@ -43,6 +43,7 @@
             // 
             // btnWifi
             // 
+            this.btnWifi.Enabled = false;
             this.btnWifi.Location = new System.Drawing.Point(12, 12);
             this.btnWifi.Name = "btnWifi";
             this.btnWifi.Size = new System.Drawing.Size(335, 23);
@@ -65,6 +66,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "查看本地WiFi密码";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.ResumeLayout(false);
 
         }

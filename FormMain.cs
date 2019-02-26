@@ -80,7 +80,20 @@ namespace ViewLocalWiFiKey
         /// <param name="e"></param>
         private void btnWifi_Click(object sender, EventArgs e)
         {
+            ((Button)sender).Enabled = false;
             GetWiFiListViewData(listViewWifi);
+            ((Button)sender).Enabled = true;
+        }
+
+        /// <summary>
+        /// 页面加载完成时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_Shown(object sender, EventArgs e)
+        {
+            GetWiFiListViewData(listViewWifi);
+            btnWifi.Enabled = true;
         }
     }
 }
