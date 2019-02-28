@@ -17,6 +17,33 @@ namespace ViewLocalWiFiKey
             
         }
 
+        public Dictionary<string,string> GetWiFiInfo()
+        {
+            Dictionary<string, string> dicWiFi = new Dictionary<string, string>();
+            string[] arrSSID = GetWiFiSSID();
+            if (arrSSID.Length > 0)
+            {
+                foreach (string item in arrSSID)
+                {
+                    dicWiFi.Add(item, "");
+                }
+                object lockObj = new object();
+                Parallel.ForEach(arrSSID, (item) => {
+                    string key = GetWiFiKey(item);
+                    lock (lockObj)
+                    {
+                        dicWiFi[item] = key;
+                    }
+                });
+            }
+            return dicWiFi;
+        }
+
+        /// <summary>
+        /// 获取指定WiFi密码
+        /// </summary>
+        /// <param name="ssid"></param>
+        /// <returns></returns>
         public string GetWiFiKey(string ssid)
         {
             string strWifiInfo;
