@@ -31,14 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.listViewWifi = new System.Windows.Forms.ListView();
-            this.btnWifi = new System.Windows.Forms.Button();
             this.menuListWifi = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolMenuWiFi = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolMenuCopyKey = new System.Windows.Forms.ToolStripMenuItem();
             this.toolMenuCopySSID = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolMenuWiFi = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolMenuSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnWifi = new System.Windows.Forms.Button();
             this.menuListWifi.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,18 +52,6 @@
             this.listViewWifi.TabIndex = 0;
             this.listViewWifi.UseCompatibleStateImageBehavior = false;
             // 
-            // btnWifi
-            // 
-            this.btnWifi.Enabled = false;
-            this.btnWifi.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnWifi.Location = new System.Drawing.Point(12, 12);
-            this.btnWifi.Name = "btnWifi";
-            this.btnWifi.Size = new System.Drawing.Size(335, 29);
-            this.btnWifi.TabIndex = 1;
-            this.btnWifi.Text = "刷新";
-            this.btnWifi.UseVisualStyleBackColor = true;
-            this.btnWifi.Click += new System.EventHandler(this.btnWifi_Click);
-            // 
             // menuListWifi
             // 
             this.menuListWifi.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -75,6 +63,18 @@
             this.toolMenuSave});
             this.menuListWifi.Name = "menuListWifi";
             this.menuListWifi.Size = new System.Drawing.Size(149, 104);
+            // 
+            // toolMenuWiFi
+            // 
+            this.toolMenuWiFi.Name = "toolMenuWiFi";
+            this.toolMenuWiFi.Size = new System.Drawing.Size(148, 22);
+            this.toolMenuWiFi.Text = "刷新";
+            this.toolMenuWiFi.Click += new System.EventHandler(this.toolMenuWiFi_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
             // 
             // toolMenuCopyKey
             // 
@@ -90,18 +90,6 @@
             this.toolMenuCopySSID.Text = "复制WiFi名称";
             this.toolMenuCopySSID.Click += new System.EventHandler(this.toolMenuCopySSID_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
-            // 
-            // toolMenuWiFi
-            // 
-            this.toolMenuWiFi.Name = "toolMenuWiFi";
-            this.toolMenuWiFi.Size = new System.Drawing.Size(148, 22);
-            this.toolMenuWiFi.Text = "刷新";
-            this.toolMenuWiFi.Click += new System.EventHandler(this.toolMenuWiFi_Click);
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -113,6 +101,18 @@
             this.toolMenuSave.Size = new System.Drawing.Size(148, 22);
             this.toolMenuSave.Text = "备份WiFi信息";
             this.toolMenuSave.Click += new System.EventHandler(this.toolMenuSave_Click);
+            // 
+            // btnWifi
+            // 
+            this.btnWifi.Enabled = false;
+            this.btnWifi.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnWifi.Location = new System.Drawing.Point(12, 12);
+            this.btnWifi.Name = "btnWifi";
+            this.btnWifi.Size = new System.Drawing.Size(335, 29);
+            this.btnWifi.TabIndex = 1;
+            this.btnWifi.Text = "刷新";
+            this.btnWifi.UseVisualStyleBackColor = true;
+            this.btnWifi.Click += new System.EventHandler(this.btnWifi_Click);
             // 
             // FormMain
             // 

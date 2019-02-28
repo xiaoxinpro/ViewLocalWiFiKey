@@ -84,27 +84,50 @@ namespace ViewLocalWiFiKey
         /// 获取WiFi列表数据
         /// </summary>
         /// <param name="listView"></param>
-        private void GetWiFiListViewData(ListView listView)
+        private void GetWiFiListViewData(ListView listView, bool isSync = false)
         {
             InitListView(listView);
-            string[] arrSSID = ObjWiFi.GetWiFiSSID();
-            if (arrSSID.Length > 0)
+            if (isSync)
             {
-                foreach (string item in arrSSID)
+                //同步执行
+                string[] arrSSID = ObjWiFi.GetWiFiSSID();
+                if (arrSSID.Length > 0)
                 {
-                    this.Refresh();
-                    ListViewItem listViewItem = new ListViewItem();
-                    listViewItem.Text = (listView.Items.Count + 1).ToString();
-                    listViewItem.SubItems.Add(item);
-                    listViewItem.SubItems.Add(ObjWiFi.GetWiFiKey(item));
-                    listView.Items.Add(listViewItem);
+                    foreach (string item in arrSSID)
+                    {
+                        this.Refresh();
+                        ListViewItem listViewItem = new ListViewItem();
+                        listViewItem.Text = (listView.Items.Count + 1).ToString();
+                        listViewItem.SubItems.Add(item);
+                        listViewItem.SubItems.Add(ObjWiFi.GetWiFiKey(item));
+                        listView.Items.Add(listViewItem);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("未找到WiFi信息。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("未找到WiFi信息。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //异步执行
+                Dictionary<string, string> dicWiFi = ObjWiFi.GetWiFiInfo();
+                if (dicWiFi.Count > 0)
+                {
+                    foreach (KeyValuePair<string, string> item in dicWiFi)
+                    {
+                        ListViewItem listViewItem = new ListViewItem();
+                        listViewItem.Text = (listView.Items.Count + 1).ToString();
+                        listViewItem.SubItems.Add(item.Key);
+                        listViewItem.SubItems.Add(item.Value);
+                        listView.Items.Add(listViewItem);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("未找到WiFi信息。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
         }
 
         /// <summary>
@@ -126,6 +149,7 @@ namespace ViewLocalWiFiKey
         /// <param name="e"></param>
         private void FormMain_Shown(object sender, EventArgs e)
         {
+            this.Refresh();
             GetWiFiListViewData(listViewWifi);
             btnWifi.Enabled = true;
         }
