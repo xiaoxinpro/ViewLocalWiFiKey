@@ -50,7 +50,7 @@ namespace ViewLocalWiFiKey
             try
             {
                 const string DEFAULT = "    关键内容            : ";
-                strWifiInfo = RunCommand("wlan show profile " + ssid + " key=clear" );
+                strWifiInfo = RunCommand("wlan show profile \"" + ssid + "\" key=clear" );
                 int start = strWifiInfo.IndexOf(DEFAULT);
                 if (start > 0)
                 {
